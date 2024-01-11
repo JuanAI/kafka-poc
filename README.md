@@ -1,4 +1,5 @@
-# Steps
+# Kafka POC
+## Steps for running the app
 
 Run the following command in the directory where your docker-compose.yml file is located:
 
@@ -31,3 +32,7 @@ Run consumer1 or/and consumer2
 node consumer1.js
 node consumer2.js
 ```
+
+## Notes
+
+- The Kafka setup used here is basic and suitable for development and testing. For production use, you'll need a more robust setup, possibly with multiple brokers, better error handling, and considerations for scalability and reliability.
