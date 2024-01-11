@@ -63,3 +63,6 @@ node consumer2.js
   - Granularity: A broker is a single Kafka server, whereas a cluster refers to the collective system of multiple brokers working together.
   - Scalability and Redundancy: While a single broker can handle Kafka operations, a cluster provides scalability and redundancy. In a cluster, responsibilities are distributed across multiple brokers.
   - Failure Handling: Clusters are more resilient to failures. If a broker in a cluster fails, other brokers in the cluster can take over its responsibilities, ensuring continued availability of the service.
+
+
+Good reference: https://levelup.gitconnected.com/kraft-kafka-cluster-with-docker-e79a97d19f2c
