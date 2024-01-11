@@ -65,4 +65,8 @@ node consumer2.js
   - Failure Handling: Clusters are more resilient to failures. If a broker in a cluster fails, other brokers in the cluster can take over its responsibilities, ensuring continued availability of the service.
 
 
-Good reference: https://levelup.gitconnected.com/kraft-kafka-cluster-with-docker-e79a97d19f2c
+Good references: 
+- https://levelup.gitconnected.com/kraft-kafka-cluster-with-docker-e79a97d19f2c
+- https://developer.confluent.io/learn/kraft/
+- https://github.com/confluentinc/cp-all-in-one/blob/master/cp-all-in-one-kraft/docker-compose.yml
+- https://github.com/conduktor/kafka-stack-docker-compose (with zookeeper)
