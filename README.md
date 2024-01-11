@@ -1,35 +1,31 @@
 # Kafka POC
+
 ## Steps for running the app
 
 Run the following command in the directory where your docker-compose.yml file is located:
 
-```
-docker-compose up
+```docker-compose up
 ```
 
 Initialize your Node.js project (if you haven't already):
 
-```
-npm init -y
+```npm init -y
 ```
 
 Install Kafka Node.js client. There are several clients available; for this example, we'll use kafkajs:
 
-```
-npm install kafkajs
+```npm install kafkajs
 ```
 
 Run producer1 or/and producer2
 
-```
-node producer1.js
+```node producer1.js
 node producer2.js
 ```
 
 Run consumer1 or/and consumer2
 
-```
-node consumer1.js
+```node consumer1.js
 node consumer2.js
 ```
 
@@ -49,3 +45,21 @@ node consumer2.js
     - `auto.offset.reset`: This consumer configuration determines where the consumer starts reading if no valid offset is found. It can be set to earliest (to start from the earliest message) or latest (to start from the next message after the consumer starts).
     - `Retention Policy`: The broker's configuration for message retention (`log.retention.hours`, `log.retention.bytes`, etc.) determines how long messages are stored.
   - `Use Cases`: This ability is particularly useful for scenarios where you need guaranteed message processing. If a consumer goes down temporarily (due to a crash, deployment, etc.), it can catch up on all missed messages once it's back online, ensuring no data is lost.
+
+### Kafka brokers vs Kafka clusters
+
+- Kafka Brokers
+  - Definition: A Kafka broker is a single Kafka server instance. It's responsible for storing and managing the data (messages or records). Each broker holds certain Kafka topics and partitions.
+  - Role in Scalability and Fault Tolerance: Brokers are designed to work in concert. By having multiple brokers, Kafka achieves scalability, load balancing, and fault tolerance. If one broker fails, others can take over its duties.
+  - Communication with Producers and Consumers: Producers send messages to brokers (which then store these messages), and consumers read messages from the brokers. The brokers handle all the details of which messages belong to which partitions and topics.
+  
+- Kafka Clusters
+  - Definition: A Kafka cluster is a group of one or more brokers working together. The cluster is the complete Kafka instance encompassing all brokers.
+  - Distributed Nature: The essence of a Kafka cluster is its distributed nature. This means it can scale horizontally by adding more brokers. The data (topics and partitions) is distributed across the cluster, providing high availability and redundancy.
+  - Cluster Coordination: Originally, Kafka used ZooKeeper for managing cluster metadata, coordinating brokers, and electing leaders among partitions. However, newer versions of Kafka (2.8 and later) introduced KRaft mode, which allows Kafka to operate without ZooKeeper, with the coordination logic built directly into Kafka itself.
+  - Leadership and Replication: In a cluster, one broker acts as the leader for a given partition, handling all reads and writes for that partition. Other brokers may replicate this partition for fault tolerance. The cluster manages this leader election and replication process.
+
+- Key Differences
+  - Granularity: A broker is a single Kafka server, whereas a cluster refers to the collective system of multiple brokers working together.
+  - Scalability and Redundancy: While a single broker can handle Kafka operations, a cluster provides scalability and redundancy. In a cluster, responsibilities are distributed across multiple brokers.
+  - Failure Handling: Clusters are more resilient to failures. If a broker in a cluster fails, other brokers in the cluster can take over its responsibilities, ensuring continued availability of the service.
