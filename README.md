@@ -81,5 +81,3 @@ TODO:
 - [ ] Include docker Swam, and learn how to use it
 - [ ] Deploy infrastructure in AWS using TF ->  EC2 Spot Instances
 - [ ] Use mechanism for spotting termination warning
-
-
