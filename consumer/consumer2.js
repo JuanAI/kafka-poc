@@ -1,6 +1,7 @@
 const { Kafka } = require('kafkajs');
 
-const kafka = new Kafka({ clientId: "consumer2", brokers: ["localhost:9092"] });
+// For external it should be "localhost:9093"
+const kafka = new Kafka({ clientId: "consumer2", brokers: ["kafka2:29092"] });
 const consumer = kafka.consumer({ groupId: "stock-group2" });
 
 async function run() {
