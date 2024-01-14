@@ -25,5 +25,3 @@ COPY --from=kafka /usr/share/java /usr/share/java
 # Set working directory
 WORKDIR /usr/src/app
 
-# Set entrypoint to Node.js application
-CMD sh -c "sleep 30 && node producer1.js"
