@@ -70,3 +70,16 @@ Good references:
 - https://developer.confluent.io/learn/kraft/
 - https://github.com/confluentinc/cp-all-in-one/blob/master/cp-all-in-one-kraft/docker-compose.yml
 - https://github.com/conduktor/kafka-stack-docker-compose (with zookeeper)
+
+TODO:
+
+- [x] Create node consumer & producer
+- [x] Kafka with and withouth zookeeper
+- [x] Kafka single & multiple brokers
+- [ ] Add consumer & producer in docker compose and enable communication
+- [ ] Add Prometheus & Grafana for monitoring
+- [ ] Include docker Swam, and learn how to use it
+- [ ] Deploy infrastructure in AWS using TF ->  EC2 Spot Instances
+- [ ] Use mechanism for spotting termination warning
+
+
