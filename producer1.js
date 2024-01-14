@@ -1,6 +1,7 @@
 const { Kafka } = require('kafkajs');
 
-const kafka = new Kafka({ clientId: "broker1", brokers: ["localhost:9092"] });
+// For external it should be "localhost:9092"
+const kafka = new Kafka({ clientId: "broker1", brokers: ["kafka1:29092"] });
 const producer = kafka.producer();
 const brokerName = "Broker1";
 
