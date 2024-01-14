@@ -25,3 +25,8 @@ services:
       image: my-kafka-producer
       depends_on:
         - kafka1
+
+  consumer:
+      image: my-kafka-consumer
+      depends_on:
+        - producer
