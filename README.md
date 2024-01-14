@@ -78,6 +78,7 @@ TODO:
 - [x] Kafka single & multiple brokers
 - [ ] Add consumer & producer in docker compose and enable communication
 - [ ] Add Prometheus & Grafana for monitoring
+- [ ] Add dependabot
 - [ ] Include docker Swam, and learn how to use it
 - [ ] Deploy infrastructure in AWS using TF ->  EC2 Spot Instances
 - [ ] Use mechanism for spotting termination warning
