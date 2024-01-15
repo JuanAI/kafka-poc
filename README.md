@@ -76,9 +76,13 @@ TODO:
 - [x] Create node consumer & producer
 - [x] Kafka with and withouth zookeeper
 - [x] Kafka single & multiple brokers
-- [ ] Add consumer & producer in docker compose and enable communication
+- [x] Add consumer & producer in docker compose and enable communication
 - [ ] Add Prometheus & Grafana for monitoring
 - [ ] Add dependabot
 - [ ] Include docker Swam, and learn how to use it
 - [ ] Deploy infrastructure in AWS using TF ->  EC2 Spot Instances
 - [ ] Use mechanism for spotting termination warning
+
+TODO IRRELEVANT:
+
+- [ ] Multiple zk brokers not working with multiple included consumer / producers
