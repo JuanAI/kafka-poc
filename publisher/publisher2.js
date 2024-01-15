@@ -1,7 +1,13 @@
 const { Kafka } = require('kafkajs');
+require('dotenv').config();
+
+// Accessing environment variables
+const kafkaHost = process.env.KF_HOST;
+const kafkaPort = process.env.KF_PORT;
 
 // For external it should be "localhost:9093"
-const kafka = new Kafka({ clientId: "broker2", brokers: ["kafka2:29092"] });
+// const kafka = new Kafka({ clientId: "broker2", brokers: ["kafka2:29092"] });
+const kafka = new Kafka({ clientId: "broker2", brokers: [`${kafkaHost}:${kafkaPort}`] });
 const producer = kafka.producer();
 const brokerName = "Broker2";
 
