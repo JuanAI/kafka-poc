@@ -44,4 +44,4 @@ services:
       environment:
         - KF_HOST=kafka1
         - KF_PORT=29092
-      command: sh -c "sleep 30 && node consumer1.js"
+      command: sh -c "sleep 40 && node consumer1.js"
