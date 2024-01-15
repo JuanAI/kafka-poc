@@ -11,6 +11,8 @@ const kafka = new Kafka({ clientId: "broker2", brokers: [`${kafkaHost}:${kafkaPo
 const producer = kafka.producer();
 const brokerName = "Broker2";
 
+// console.log(`[${brokerName}] HOST:PORT: ${kafkaHost}:${kafkaPort}`);
+
 async function run() {
   await producer.connect();
   setInterval(async () => {
@@ -20,6 +22,7 @@ async function run() {
       topic: "stock-market2",
       messages: [{ value: JSON.stringify(stock) }],
     });
+    // console.log(`[${brokerName}] HOST:PORT: ${kafkaHost}:${kafkaPort}`);
     console.log(`[${brokerName}] Sent: ${JSON.stringify(stock)}`);
   }, 2000);
 }

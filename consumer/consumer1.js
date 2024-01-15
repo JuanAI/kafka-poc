@@ -10,11 +10,14 @@ const kafkaPort = process.env.KF_PORT;
 const kafka = new Kafka({ clientId: "consumer1", brokers: [`${kafkaHost}:${kafkaPort}`] });
 const consumer = kafka.consumer({ groupId: "stock-group1" });
 
+// console.log(`[Consumer1] HOST:PORT: ${kafkaHost}:${kafkaPort}`);
+
 async function run() {
   await consumer.connect();
   await consumer.subscribe({ topic: "stock-market", fromBeginning: true });
   await consumer.run({
     eachMessage: async ({ message }) => {
+      // console.log(`[Consumer1] HOST:PORT: ${kafkaHost}:${kafkaPort}`);
       console.log(`[Consumer1] Received: ${message.value.toString()}`);
     },
   });
