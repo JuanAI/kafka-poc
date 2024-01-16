@@ -5,16 +5,19 @@
 Run the following command in the directory where your docker-compose.yml file is located:
 
 ```docker-compose up
+
 ```
 
 Initialize your Node.js project (if you haven't already):
 
 ```npm init -y
+
 ```
 
 Install Kafka Node.js client. There are several clients available; for this example, we'll use kafkajs:
 
 ```npm install kafkajs
+
 ```
 
 Run producer1 or/and producer2
@@ -52,8 +55,8 @@ node consumer2.js
   - Definition: A Kafka broker is a single Kafka server instance. It's responsible for storing and managing the data (messages or records). Each broker holds certain Kafka topics and partitions.
   - Role in Scalability and Fault Tolerance: Brokers are designed to work in concert. By having multiple brokers, Kafka achieves scalability, load balancing, and fault tolerance. If one broker fails, others can take over its duties.
   - Communication with Producers and Consumers: Producers send messages to brokers (which then store these messages), and consumers read messages from the brokers. The brokers handle all the details of which messages belong to which partitions and topics.
-  
 - Kafka Clusters
+
   - Definition: A Kafka cluster is a group of one or more brokers working together. The cluster is the complete Kafka instance encompassing all brokers.
   - Distributed Nature: The essence of a Kafka cluster is its distributed nature. This means it can scale horizontally by adding more brokers. The data (topics and partitions) is distributed across the cluster, providing high availability and redundancy.
   - Cluster Coordination: Originally, Kafka used ZooKeeper for managing cluster metadata, coordinating brokers, and electing leaders among partitions. However, newer versions of Kafka (2.8 and later) introduced KRaft mode, which allows Kafka to operate without ZooKeeper, with the coordination logic built directly into Kafka itself.
@@ -64,8 +67,8 @@ node consumer2.js
   - Scalability and Redundancy: While a single broker can handle Kafka operations, a cluster provides scalability and redundancy. In a cluster, responsibilities are distributed across multiple brokers.
   - Failure Handling: Clusters are more resilient to failures. If a broker in a cluster fails, other brokers in the cluster can take over its responsibilities, ensuring continued availability of the service.
 
+Good references:
 
-Good references: 
 - https://levelup.gitconnected.com/kraft-kafka-cluster-with-docker-e79a97d19f2c
 - https://developer.confluent.io/learn/kraft/
 - https://github.com/confluentinc/cp-all-in-one/blob/master/cp-all-in-one-kraft/docker-compose.yml
@@ -77,12 +80,12 @@ TODO:
 - [x] Kafka with and withouth zookeeper
 - [x] Kafka single & multiple brokers
 - [x] Add consumer & producer in docker compose and enable communication
-- [ ] Add redis database for multiple producers & one consumer & one broker
+- [x] Add redis database for multiple producers & one consumer & one broker
 - [ ] Add python consumer
 - [ ] Add frontend from consumer for displaying last ticks from brokers
-- [ ] Add Prometheus & Grafana for monitoring kafka
+- [ ] Add Prometheus & Grafana for monitoring kafka broker
 - [ ] Add dependabot
 - [ ] Include docker Swam, and learn how to use it
-- [ ] Deploy infrastructure in AWS using TF ->  EC2 Spot Instances
+- [ ] Deploy infrastructure in AWS using TF -> EC2 Spot Instances
 - [ ] Use mechanism for spotting EC2 Spot instance termination warning
 - [ ] Use faster consumers in rust code
