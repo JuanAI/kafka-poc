@@ -4,6 +4,10 @@ require('dotenv').config();
 // Accessing environment variables
 const kafkaHost = process.env.KF_HOST;
 const kafkaPort = process.env.KF_PORT;
+let kafkaTopic = process.env.KF_TOPIC;
+
+// Set default topic if KF_TOPIC is null or undefined
+kafkaTopic = kafkaTopic || "stock-market2";
 
 // For external it should be "localhost:9093"
 // const kafka = new Kafka({ clientId: "broker2", brokers: ["kafka2:29092"] });
@@ -19,7 +23,7 @@ async function run() {
     const price = (Math.random() * 1000).toFixed(2);
     const stock = { symbol: "AAPL", price, broker: brokerName };
     await producer.send({
-      topic: "stock-market2",
+      topic: kafkaTopic,
       messages: [{ value: JSON.stringify(stock) }],
     });
     // console.log(`[${brokerName}] HOST:PORT: ${kafkaHost}:${kafkaPort}`);
