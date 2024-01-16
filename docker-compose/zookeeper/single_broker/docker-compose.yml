@@ -40,7 +40,7 @@ services:
   publisher:
     container_name: publisher
     build:
-      context: ../../publisher
+      context: ../../../publisher
       dockerfile: Dockerfile
     depends_on:
       - kafka1
@@ -52,7 +52,7 @@ services:
   consumer:
     container_name: consumer
     build:
-      context: ../../consumer
+      context: ../../../consumer
       dockerfile: Dockerfile
     depends_on:
       - kafka1
