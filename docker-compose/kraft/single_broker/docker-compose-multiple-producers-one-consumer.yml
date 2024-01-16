@@ -1,5 +1,7 @@
 version: "3"
 services:
+  redis-server:
+    image: "redis"
   kafka1:
     image: confluentinc/cp-kafka
     container_name: kafka1
