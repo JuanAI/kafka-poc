@@ -5,14 +5,24 @@
       "type": "node",
       "request": "launch",
       "name": "consumer1",
-      "program": "${workspaceFolder}/consumer/consumer1.js",
+      "program": "${workspaceFolder}/consumer/node/consumer1.js",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "node",
       "runtimeArgs": [],
       "env": {},
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "Python: PyConsumer",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/consumer/python/consumer1.py",
+      "console": "integratedTerminal",
+      "python": "${workspaceFolder}/consumer/python/.venv/bin/python"
     }
   ]
 }
