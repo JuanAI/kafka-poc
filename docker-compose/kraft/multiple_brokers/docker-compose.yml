@@ -47,7 +47,7 @@ services:
   publisher1:
       container_name: publisher1
       build:
-        context: ./publisher
+        context: ../../cpublisher
         dockerfile: Dockerfile
       depends_on:
         - kafka1
@@ -59,7 +59,7 @@ services:
   consumer1:
       container_name: consumer1
       build:
-        context: ./consumer
+        context: ../../cconsumer
         dockerfile: Dockerfile
       depends_on:
         - kafka1
@@ -72,7 +72,7 @@ services:
   publisher2:
       container_name: publisher2
       build:
-        context: ./publisher
+        context: ../../cpublisher
         dockerfile: Dockerfile
       depends_on:
         - kafka2
@@ -84,7 +84,7 @@ services:
   consumer2:
       container_name: consumer2
       build:
-        context: ./consumer
+        context: ../../consumer
         dockerfile: Dockerfile
       depends_on:
         - kafka2
