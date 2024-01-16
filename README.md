@@ -78,6 +78,7 @@ TODO:
 - [x] Kafka single & multiple brokers
 - [x] Add consumer & producer in docker compose and enable communication
 - [ ] Add redis database for multiple producers & one consumer & one broker
+- [ ] Add python consumer
 - [ ] Add frontend from consumer for displaying last ticks from brokers
 - [ ] Add Prometheus & Grafana for monitoring kafka
 - [ ] Add dependabot
@@ -85,7 +86,3 @@ TODO:
 - [ ] Deploy infrastructure in AWS using TF ->  EC2 Spot Instances
 - [ ] Use mechanism for spotting EC2 Spot instance termination warning
 - [ ] Use faster consumers in rust code
-
-TODO IRRELEVANT:
-
-- [ ] Multiple zk brokers not working with multiple included consumer / producers
