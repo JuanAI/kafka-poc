@@ -82,7 +82,7 @@ TODO:
 - [x] Add consumer & producer in docker compose and enable communication
 - [x] Add redis database for multiple producers & one consumer & one broker
 - [ ] Add python consumer
-- [ ] Finish Makefile installation
+- [ ] Finish Makefile installation, and refactor other docker-compose modules
 - [ ] Add frontend from consumer for displaying last ticks from brokers
 - [ ] Add Prometheus & Grafana for monitoring kafka broker
 - [ ] Add dependabot
