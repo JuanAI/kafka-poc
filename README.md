@@ -90,3 +90,4 @@ TODO:
 - [ ] Deploy infrastructure in AWS using TF -> EC2 Spot Instances
 - [ ] Use mechanism for spotting EC2 Spot instance termination warning
 - [ ] Use faster consumers in rust code
+- [ ] Add Documentation Antora?
