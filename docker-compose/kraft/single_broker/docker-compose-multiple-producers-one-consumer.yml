@@ -49,10 +49,10 @@ services:
       - KF_TOPIC=stock-market1
     command: sh -c "sleep 30 && node publisher1.js"
 
-  consumer1-node:
-    container_name: consumer1
+  consumer-rust-1:
+    container_name: consumer-rust-1
     build:
-      context: ../../../consumer/python
+      context: ../../../consumer/rust
       dockerfile: Dockerfile
     depends_on:
       - kafka1
@@ -61,10 +61,24 @@ services:
       - KF_HOST=kafka1
       - KF_PORT=29092
       - KF_TOPIC=stock-market1
-    command: sh -c "sleep 40 && node consumer1.js"
+    command: sh -c "sleep 40 && kafka-rust"
 
-  # consumer1-python:
-  #   container_name: consumer1
+  # consumer-node-1:
+  #   container_name: consumer-node-1
+  #   build:
+  #     context: ../../../consumer/node
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - kafka1
+  #     - publisher2
+  #   environment:
+  #     - KF_HOST=kafka1
+  #     - KF_PORT=29092
+  #     - KF_TOPIC=stock-market1
+  #   command: sh -c "sleep 40 && node consumer1.js"
+
+  # consumer-python-1:
+  #   container_name: consumer-python-1
   #   build:
   #     context: ../../../consumer/python
   #     dockerfile: Dockerfile
