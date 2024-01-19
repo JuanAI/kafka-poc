@@ -16,58 +16,42 @@ redis_host = "redis-server"
 redis_port = 6379
 
 # Create Redis client
-r = redis.Redis(host=redis_host, port=redis_port, db=0)
+r = redis.Redis(host=redis_host, port=redis_port, db=0, decode_responses=True)
+
+
+# Function to insert data into Redis
+def insert_data_to_redis(key, message):
+    # Using LPUSH to insert data at the head of the list and LTRIM to limit the list to the last 100 items
+    r.lpush(key, message)
+    r.ltrim(key, 0, 99)
+
+
+# Function to read last `n` items from Redis
+def read_data_from_redis(key, n=100):
+    # Using LRANGE to get the last `n` items from the list
+    return r.lrange(key, 0, n - 1)
+
 
 # Kafka consumer configuration
 consumer = KafkaConsumer(
-    # Default port is 9092. If no servers are specified, will default to localhost:9092.
     kafkaTopic,
     group_id="stock-group1",
-    bootstrap_servers="localhost:9092",
+    bootstrap_servers=f"{kafkaHost}:{kafkaPort}",
 )
 
-for msg in consumer:
-    print(msg.value)  # CONTINUE HERE!!
 
+def run():
+    for msg in consumer:
+        # Decode message to string
+        message = msg.value.decode("utf-8")
+        print(f"Received message: {message}")
 
-# def insert_data_into_redis(topic, message):
-#     r.lpush(topic, message)
-#     r.ltrim(topic, 0, 99)
+        # Insert data to Redis
+        insert_data_to_redis(kafkaTopic, message)
 
-
-# def read_items_from_redis(topic, amount_of_data):
-#     return r.lrange(topic, 0, amount_of_data - 1)
-
-
-# def run():
-#     try:
-#         consumer.subscribe([kafkaTopic])
-
-#         while True:
-#             msg = consumer.poll(timeout=1.0)
-#             if msg is None:
-#                 continue
-#             if msg.error():
-#                 raise KafkaException(msg.error())
-#             else:
-#                 # Print the received message
-#                 print(f"Received message: {msg.value().decode('utf-8')}")
-#                 try:
-#                     # Insert data into Redis
-#                     insert_data_into_redis(kafkaTopic, msg.value().decode("utf-8"))
-#                 except Exception as e:
-#                     print(f"Error inserting data into Redis: {e}")
-
-#                 try:
-#                     # Read the last 10 items from Redis
-#                     prices = read_items_from_redis(kafkaTopic, 10)
-#                     print(f"Last 10 items from Redis DB: {prices}")
-#                 except Exception as e:
-#                     print(f"Error fetching items from Redis: {e}")
-
-#     finally:
-#         # Close down consumer to commit final offsets.
-#         consumer.close()
+        # Read and print last 10 items from Redis
+        last_messages = read_data_from_redis(kafkaTopic, 10)
+        print(f"Last 10 items from Redis: {last_messages}")
 
 
 if __name__ == "__main__":
