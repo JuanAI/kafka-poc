@@ -61,6 +61,7 @@ services:
       - KF_HOST=kafka1
       - KF_PORT=29092
       - KF_TOPIC=stock-market1
+      - REDIS_URL=redis://redis-server:6379
     command: sh -c "sleep 40 && kafka-rust"
 
   # consumer-node-1:
