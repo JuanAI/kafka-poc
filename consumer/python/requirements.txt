@@ -1,3 +1,4 @@
 kafka-python
 redis
 python-dotenv
+influxdb-client
