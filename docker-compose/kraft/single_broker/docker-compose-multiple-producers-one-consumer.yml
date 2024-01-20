@@ -2,6 +2,25 @@ version: "3"
 services:
   redis-server:
     image: "redis"
+
+  influxdb:
+    image: influxdb:2.0
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=adminpassword
+      - DOCKER_INFLUXDB_INIT_ORG=my-org
+      - DOCKER_INFLUXDB_INIT_BUCKET=my-bucket
+      - DOCKER_INFLUXDB_INIT_RETENTION=1w
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-super-secret-auth-token
+    # volumes:
+    #   - influxdb_data:/var/lib/influxdb2
+    depends_on:
+      - redis-server
+
   kafka1:
     image: confluentinc/cp-kafka
     container_name: kafka1
@@ -22,6 +41,8 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       CLUSTER_ID: "ciWo7IWazngRchmPES6q5A=="
       KAFKA_LOG_DIRS: "/tmp/kraft-combined-logs"
+    depends_on:
+      - influxdb
 
   publisher1:
     container_name: publisher1
@@ -49,20 +70,20 @@ services:
       - KF_TOPIC=stock-market1
     command: sh -c "sleep 30 && node publisher1.js"
 
-  consumer-rust-1:
-    container_name: consumer-rust-1
-    build:
-      context: ../../../consumer/rust
-      dockerfile: Dockerfile
-    depends_on:
-      - kafka1
-      - publisher2
-    environment:
-      - KF_HOST=kafka1
-      - KF_PORT=29092
-      - KF_TOPIC=stock-market1
-      - REDIS_URL=redis://redis-server:6379
-    command: sh -c "sleep 40 && kafka-rust"
+  # consumer-rust-1:
+  #   container_name: consumer-rust-1
+  #   build:
+  #     context: ../../../consumer/rust
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - kafka1
+  #     - publisher2
+  #   environment:
+  #     - KF_HOST=kafka1
+  #     - KF_PORT=29092
+  #     - KF_TOPIC=stock-market1
+  #     - REDIS_URL=redis://redis-server:6379
+  #   command: sh -c "sleep 40 && kafka-rust"
 
   # consumer-node-1:
   #   container_name: consumer-node-1
@@ -78,16 +99,16 @@ services:
   #     - KF_TOPIC=stock-market1
   #   command: sh -c "sleep 40 && node consumer1.js"
 
-  # consumer-python-1:
-  #   container_name: consumer-python-1
-  #   build:
-  #     context: ../../../consumer/python
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     - kafka1
-  #     - publisher2
-  #   environment:
-  #     - KF_HOST=kafka1
-  #     - KF_PORT=29092
-  #     - KF_TOPIC=stock-market1
-  #   command: sh -c "sleep 40 && python consumer1.py"
+  consumer-python-1:
+    container_name: consumer-python-1
+    build:
+      context: ../../../consumer/python
+      dockerfile: Dockerfile
+    depends_on:
+      - kafka1
+      - publisher2
+    environment:
+      - KF_HOST=kafka1
+      - KF_PORT=29092
+      - KF_TOPIC=stock-market1
+    command: sh -c "sleep 40 && python consumer1.py"
