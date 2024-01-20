@@ -17,10 +17,18 @@
       ]
     },
     {
-      "name": "Python: PyConsumer",
+      "name": "Python: influxdb-pyconsumer-1",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/consumer/python/consumer1.py",
+      "program": "${workspaceFolder}/consumer/python/influxdb-consumer-1.py",
+      "console": "integratedTerminal",
+      "python": "${workspaceFolder}/consumer/python/.venv/bin/python"
+    },
+    {
+      "name": "Python: redis-pyconsumer-1",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/consumer/python/redis-consumer-1.py",
       "console": "integratedTerminal",
       "python": "${workspaceFolder}/consumer/python/.venv/bin/python"
     }
