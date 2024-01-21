@@ -3,9 +3,9 @@ const redis = require("redis");
 
 require("dotenv").config();
 
-const kafkaHost = process.env.KF_HOST;
-const kafkaPort = process.env.KF_PORT;
-let kafkaTopic = process.env.KF_TOPIC || "stock-market";
+const kafkaHost = process.env.KF_HOST || "localhost";
+const kafkaPort = process.env.KF_PORT || "9092";
+const kafkaTopic = process.env.KF_TOPIC || "stock-market1";
 
 const client = redis.createClient({
   socket: {

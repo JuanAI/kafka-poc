@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from influxdb_client import InfluxDBClient, Point, WriteOptions
 from influxdb_client.client.write_api import SYNCHRONOUS
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
@@ -38,17 +39,23 @@ def run():
         print(f"Received message: {message}")
 
         # Write data to InfluxDB
-        point = Point("messages").tag("topic", kafkaTopic).field("message", message)
+        point = (
+            Point("messages")
+            .tag("topic", kafkaTopic)
+            .field("message", message)
+            .time(datetime.utcnow())
+        )
         write_api.write(bucket=influxdb_bucket, org=influxdb_org, record=point)
 
         # Query the last 10 messages from InfluxDB
         query = (
             f'from(bucket: "{influxdb_bucket}")'
-            f" |> range(start: -1h)"
+            f" |> range(start: -5s)"  # Considering since 5s ago
             f' |> filter(fn: (r) => r._measurement == "messages" and r.topic == "{kafkaTopic}")'
-            f" |> sort(desc: true)"
-            f" |> limit(n:10)"
+            f" |> sort()"
+            # f" |> limit(n:10)"
         )
+
         result = query_api.query(org=influxdb_org, query=query)
 
         # Process query results

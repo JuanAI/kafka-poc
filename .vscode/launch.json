@@ -4,8 +4,23 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "consumer1",
-      "program": "${workspaceFolder}/consumer/node/consumer1.js",
+      "name": "redis-node-consumer-1",
+      "program": "${workspaceFolder}/consumer/node/redis-consumer-1.js",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [],
+      "env": {},
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "influxdb-node-consumer-1",
+      "program": "${workspaceFolder}/consumer/node/influxdb-consumer-1.js",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "node",
       "runtimeArgs": [],
